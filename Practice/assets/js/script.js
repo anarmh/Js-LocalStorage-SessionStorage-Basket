@@ -56,7 +56,7 @@ basketBtns.forEach((btn) => {
     let cardName = this.parentNode.firstElementChild.innerText;
     let cardId = parseInt(this.closest(".card").getAttribute("data-id"));
 
-    let existCard = basket.find((m) => m.id == cardId);
+    let existCard = basket.find(m => m.id == cardId);
     if (existCard != undefined) {
       existCard.count++;
     } else {
@@ -70,5 +70,16 @@ basketBtns.forEach((btn) => {
     }
 
     localStorage.setItem("basket", JSON.stringify(basket));
+    getBasketCount(basket)
   });
 });
+
+
+function getBasketCount(arr){
+  let count=0
+  for (const item of arr) {
+      count+=item.count;
+  }
+  document.querySelector("sup").innerText=count;
+}
+getBasketCount(basket)
