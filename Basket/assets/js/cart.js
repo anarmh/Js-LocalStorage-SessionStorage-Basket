@@ -19,6 +19,9 @@ if (products != null) {
            </td>
            <td class="price-product">${product.price}</td>
            <td> <button class="delete-item">Remove</button></td>
+           <td><div class="total-price">
+           <p class="total-price"></p>
+          </div></td>
       </tr>`;
   });
 
@@ -30,10 +33,33 @@ if (products != null) {
     btn.addEventListener("click", function () {
       let quantityInput = document.querySelector(".product-quantity");
       let priceCell = document.querySelector(".price-product")
+     
       let quantityValue = parseInt(quantityInput.value) + 1;
       quantityInput.value = quantityValue;
-      let total = parseInt(priceCell) * quantityValue;
-      priceCell.innerText = total;
+      let priceValue = parseFloat(priceCell.innerText.replace(/[^0-9.-]+/g,""));
+      if (!isNaN(priceValue)) {
+        let total = priceValue * quantityValue;
+        priceCell.innerText = total;
+      }
+    });
+  });
+  decreaseBtns.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      let quantityInput = document.querySelector(".product-quantity");
+      let priceCell = document.querySelector(".price-product")
+      
+      let quantityValue = parseInt(quantityInput.value) - 1;
+      if(quantityValue > 0) {
+        quantityInput.value = quantityValue;
+        let priceValue = parseFloat(priceCell.innerText.replace(/[^0-9.-]+/g,""));
+        if (!isNaN(priceValue)) {
+          let total = priceValue * quantityValue;
+          priceCell.innerText = total;
+        }
+      }
+      
+     
+     
     });
   });
 
@@ -67,3 +93,11 @@ function removeProduct() {
     });
   });
 }
+
+
+// function totalPrice(arr){
+//  let cartItem=document.querySelector()
+  
+// }
+
+// totalPrice(products);
