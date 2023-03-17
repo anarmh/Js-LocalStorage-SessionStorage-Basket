@@ -14,12 +14,13 @@ basketBtns.forEach((btn) => {
     let cardImage = this.parentNode.previousElementSibling.getAttribute("src");
     let cardName = this.parentNode.firstElementChild.innerText;
     let cardDesc = this.parentNode.children[1].innerText;
-    let cardPrice = this.previousElementSibling.innerText;
-    let cardId = this.closest(".card").getAttribute("data-id");
-
+    let cardPrice = parseInt(this.nextElementSibling.innerText);
+    let cardId = parseInt(this.closest(".card").getAttribute("data-id"));
+    
     let existCard = basket.find(m => m.id == cardId);
     if (existCard != undefined) {
       existCard.count++;
+      existCard.price=existCard.count*cardPrice
     } else {
       basket.push({
         id: cardId,
